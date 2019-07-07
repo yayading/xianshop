@@ -39,15 +39,15 @@
 		<use_bezier_curve>false</use_bezier_curve>
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
-			<category_name_to_export>All</category_name_to_export>
-			<ddl_output>C:\Users\Administrator\Desktop\xianshop_db.sql</ddl_output>
+			<category_name_to_export></category_name_to_export>
+			<ddl_output></ddl_output>
 			<excel_output></excel_output>
 			<excel_template></excel_template>
 			<image_output></image_output>
-			<java_output></java_output>
-			<package_name></package_name>
+			<java_output>G:\git\xianshop\xianshop\src</java_output>
+			<package_name>com.oracle.xianshop.model.javabean</package_name>
 			<class_name_suffix></class_name_suffix>
-			<src_file_encoding></src_file_encoding>
+			<src_file_encoding>UTF-8</src_file_encoding>
 			<put_diagram_on_excel>false</put_diagram_on_excel>
 			<use_logical_name_as_sheet>false</use_logical_name_as_sheet>
 			<create_comment>true</create_comment>
@@ -100,7 +100,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2019-07-07 10:49:44</creation_date>
-			<updated_date>2019-07-07 11:24:07</updated_date>
+			<updated_date>2019-07-07 16:11:15</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -1181,7 +1181,7 @@
 			<connections>
 				<relation>
 					<id>4</id>
-					<source>5</source>
+					<source>1</source>
 					<target>4</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -1198,7 +1198,7 @@
 				</relation>
 				<relation>
 					<id>5</id>
-					<source>1</source>
+					<source>5</source>
 					<target>4</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
@@ -1277,7 +1277,7 @@
 				<normal_column>
 					<id>22</id>
 					<referenced_column>24</referenced_column>
-					<relation>4</relation>
+					<relation>5</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1305,7 +1305,7 @@
 				<normal_column>
 					<id>23</id>
 					<referenced_column>4</referenced_column>
-					<relation>5</relation>
+					<relation>4</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>

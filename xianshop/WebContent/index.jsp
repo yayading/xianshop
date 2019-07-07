@@ -1,8 +1,21 @@
+<%@page import="com.oracle.xianshop.model.javabean.Goods"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%
+
+	if(request.getAttribute("gs")==null){
+		request.getRequestDispatcher("goods/list").forward(request, response);
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base herf="<%=basePath%>">
 	<meta charset="UTF-8">
 	<title>列表-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
@@ -754,6 +767,11 @@
 				<!-- 商品内容 -->
 				<div class="product">
 					<ul class="clearfix">
+				<% 
+					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
+					for(Goods g:gs){
+				%>
+					
 						<li>
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
@@ -763,19 +781,22 @@
 							</div>
 							<div class="proImg">
 								<a href="#">
-									<img class="lazy" src="js/lazyload/grey.gif" data-original="images/product2L.jpg" alt="">
+									<img class="lazy" src="<%=g.getGoodspic() %>" data-original="<%=g.getGoodspic() %>" alt="">
 								</a>
 							</div>
 							<div class="proTxt">
-								<p><a href="#">Blackmores EPO月见草 澳洲澳佳宝 190粒...</a></p>
-								<p class="num">已售出1000件</p>
+								<p><a href="#"><%=g.getGoodsname() %></a></p>
+								<p class="num"><%=g.getGoodsnumber() %></p>
 								<p>
-									<strong>￥178.00</strong>
-									<s>￥256.00</s>
+									<strong>￥<%=g.getGoodsprice() %></strong>
+									<s></s>
 								</p>
 							</div>
 						</li>
 						
+					
+					
+					<% }%>
 					</ul>
 				</div>
 				<!-- 底部页码 -->
