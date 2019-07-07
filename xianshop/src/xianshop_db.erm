@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>0</x>
+	<x>139</x>
 	<y>0</y>
 	<default_color>
 		<r>128</r>
@@ -39,15 +39,15 @@
 		<use_bezier_curve>false</use_bezier_curve>
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
-			<category_name_to_export>All</category_name_to_export>
-			<ddl_output>C:\Users\Administrator\Desktop\xianshop_db.sql</ddl_output>
+			<category_name_to_export></category_name_to_export>
+			<ddl_output></ddl_output>
 			<excel_output></excel_output>
 			<excel_template></excel_template>
 			<image_output></image_output>
-			<java_output></java_output>
-			<package_name></package_name>
+			<java_output>G:\git\xianshop\xianshop\src</java_output>
+			<package_name>com.oracle.xianshop.model.javabean</package_name>
 			<class_name_suffix></class_name_suffix>
-			<src_file_encoding></src_file_encoding>
+			<src_file_encoding>UTF-8</src_file_encoding>
 			<put_diagram_on_excel>false</put_diagram_on_excel>
 			<use_logical_name_as_sheet>false</use_logical_name_as_sheet>
 			<create_comment>true</create_comment>
@@ -100,7 +100,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2019-07-07 10:49:44</creation_date>
-			<updated_date>2019-07-07 11:24:07</updated_date>
+			<updated_date>2019-07-07 15:39:16</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
