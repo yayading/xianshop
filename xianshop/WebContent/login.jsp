@@ -21,7 +21,7 @@
 		<!-- 搜索和logo -->
 		<div class="logoAndSearch textWarp w1190 clearfix">
 			<div class="logo">
-				<a href="list.jsp">澳猫网</a>
+				<a href="index.jsp">澳猫网</a>
 			</div>
 			<div class="LAStxt">
 				欢迎登录

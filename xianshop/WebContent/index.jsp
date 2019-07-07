@@ -469,7 +469,7 @@
 		<div class="subnav w1190">
 			<ul class="SNLeft">
 				<li><a href="#">澳猫团</a></li>
-				<li>></li>
+				<li></li>
 				<li><a href="#">美妆个护</a></li>
 			</ul>
 		</div>
