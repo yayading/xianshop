@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="collect/list">收藏夹</a>
 						<em></em>
 						<p class="headEr different">
-							<a href="#">收藏的宝贝</a>
+							<a href="collect/list">收藏的宝贝</a>
 							<a class="last" href="#">收藏的品牌</a>
 						</p>
 					</li>
@@ -772,7 +772,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				%>
 					
 						<li style="margin-right:8px">
-							<div class="hoverShow collect"><em></em>收藏</div>
+							<a class="hoverShow collect" href="collect/add?gid=<%=g.getGoodsid() %>">收藏</a>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
 								<a class="add" href="#">加入购物车</a>

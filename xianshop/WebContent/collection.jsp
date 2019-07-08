@@ -199,11 +199,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul class="clearfix">
 						<% 
 						List<Goods> gs=(List<Goods>)request.getAttribute("cl");
+						if(gs!=null){
 						for(Goods g:gs){
 						%>
 					
 						<li style="margin-right:8px">
-							<div class="hoverShow collect"><em></em>收藏</div>
+							<a class="hoverShow collect" href="collect/del?gid=<%=g.getGoodsid() %>" target="_self">删除</a>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
 								<a class="add" href="#">加入购物车</a>
@@ -223,7 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</p>
 							</div>
 						</li>
-						<% }%>
+						<% }}%>
 					</ul>
 				</div>
 				<!-- 底部页码 -->
