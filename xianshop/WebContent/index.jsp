@@ -771,8 +771,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
 					for(Goods g:gs){
 				%>
-					
-						<li>
+				
+						<li style="margin-right:8px">
+
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
