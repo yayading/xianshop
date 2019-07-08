@@ -1,4 +1,5 @@
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
+<%@page import="com.oracle.xianshop.model.javabean.Users"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base herf="<%=basePath%>">
+    <base href="<%=basePath%>">
 	<meta charset="UTF-8">
 	<title>列表-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
@@ -36,10 +37,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<span>嗨，澳猫欢迎你！</span>
 					</a>
 				</div>
-				<div class="user">
-					<a target="_blank" href="#">登录</a>
-					<span>|</span>
-					<a target="_blank" href="#">免费注册</a>
+					<div class="user">
+					<% if(session.getAttribute("logineduser")==null){ %>
+						<a  href="login.jsp">登录</a> <span>|</span> <a
+						target="_blank" href="#">免费注册</a>
+						<%}else{ %>
+							欢迎您：<B style="text-shadow: 0px 0px 1px green"><%=((Users)session.getAttribute("logineduser")).getNicheng() %></B>!
+							<a href="">安全退出</a>
+							<%
+						} %>
 				</div>
 				<div class="phone">
 					<a href="#">
@@ -214,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<!--购物车-->
-		<a href="#" class="buy_car">
+		<a href="cart/list" class="buy_car">
 			<p>购物车</p>
 			<em>0</em>
 		</a>
@@ -777,8 +783,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
-								<a class="add" href="#">加入购物车</a>
-								<a class="contrast" href="#">商品对比</a>
+							<a class="add" href="cart/shopcart?pid=<%=g.getGoodsid() %>">加入购物车</a> <a class="contrast" href="#">商品对比</a>
 							</div>
 							<div class="proImg">
 								<a href="#">
