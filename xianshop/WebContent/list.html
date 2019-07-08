@@ -1,93 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<base href="<%=basePath%>">
 	<meta charset="UTF-8">
-	<title>提交订单-购物车-澳猫团</title>
+	<title>列表-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="css/Cart.css">
+	<link rel="stylesheet" href="css/list.css">
+	<base target="_blank">
 </head>
 <body>
-<!-- 顶部 -->
-<header>
-	<div class="head w1190">
-		<div class="headLeft">
-			<div class="loginuser">
+	<header class="wrap-all">
+		<div class="head center_1200">
+			<!-- 头部左边 -->
+			<div class="headLeft">
+				<div class="hello">
 					<a href="#">
-						<span>您好，1536983711@qq.com </span>
-						<span>|</span>
+						<em></em>
+						<span>澳猫首页</span>
+						<span>嗨，澳猫欢迎你！</span>
 					</a>
 				</div>
-			<div class="loginout">
-				<a href="#">退出</a>
-				<span>|</span>
-				<a href="#">返回首页</a>
+				<div class="user">
+					<a target="_blank" href="#">登录</a>
+					<span>|</span>
+					<a target="_blank" href="#">免费注册</a>
+				</div>
+				<div class="phone">
+					<a href="#">
+						<em></em>
+						<span>手机逛澳猫</span>
+					</a>
+				</div>
 			</div>
-			<div class="phone loginphone">
-				<a href="#">
-					<em></em>
-					<span>手机逛澳猫</span>
-				</a>
-			</div>
-		</div>
-		<div class="headRight">
-			<ul>
-				<li><a class="everday" href="#">每日签到</a></li><span>|</span>
-				<li><a href="#">我的订单</a></li><span>|</span>
-				<li class="erWrap">
-					<strong></strong>
-					<a href="#">个人中心</a>
-					<em></em>
-					<p class="headEr">
-						<a href="#">我的优惠券</a>
-						<a href="#">账户安全</a>
-						<a class="last" href="#">售后管理</a>
-					</p>
-				</li>
-				<span>|</span>
-				<li class="erWrap">
-					<a href="#">客户服务</a>
-					<em></em>
-					<p class="headEr">
-						<a href="#">联系客服</a>
-						<a href="#">购物指南</a>
+			<!-- 头部右边 -->
+			<!-- 头部右边 -->
+			<div class="headRight">
+				<ul>
+					<li><a href="#">我的订单</a></li><span>|</span>
+					<li class="erWrap">
+						<strong></strong>
+						<a href="#">个人中心</a>
+						<em></em>
+						<p class="headEr">
+							<a href="#">我的优惠券</a>
+							<a href="#">账户安全</a>
+							<a class="last" href="#">售后管理</a>
+						</p>
+					</li>
+					<span>|</span>
+					<li class="erWrap">
+						<a href="#">客户服务</a>
+						<em></em>
+						<p class="headEr">
+							<a href="#">联系客服</a>
+							<a href="#">购物指南</a>
+							<a href="#">下单与配送</a>
+							<a href="#">售后服务</a>
+							<a href="#">商家服务</a>
+							<a class="last" href="#">帮助中心</a>
+						</p>
+					</li>
+					<span>|</span>
+					<li class="erWrap">
+						<a href="#">消费者告知书</a>
+					</li>
+					<span>|</span>
+					<li class="erWrap">
+						<a href="#">收藏夹</a>
+						<em></em>
+						<p class="headEr different">
+							<a href="#">收藏的宝贝</a>
+							<a class="last" href="#">收藏的品牌</a>
+						</p>
+					</li>
+					<span>|</span>
+					<li class="erWrap">
 						<a href="#">帮助中心</a>
-						<a href="#">下单与配送</a>
-						<a href="#">售后服务</a>
-						<a href="#">商家服务</a>
-						<a class="last" href="#">帮助中心</a>
-					</p>
-				</li>
-				<span>|</span>
-				<li class="erWrap">
-					<a href="#">收藏夹</a>
-					<em></em>
-					<p class="headEr different">
-						<a href="#">收藏的宝贝</a>
-						<a class="last" href="#">收藏的品牌</a>
-					</p>
-				</li>
-				<span>|</span>
-				<li class="erWrap">
-					<a href="#">帮助中心</a>
-					<em></em>
-					<p class="headEr">
-						<a href="#">海外正品</a>
-						<a href="#">服务保障</a>
-						<a href="#">关税&清关</a>
-						<a class="last" href="#">身份证报关</a>
-					</p>
-				</li>
-				<span>|</span>
-				<li class="er_warp">
+						<em></em>
+						<p class="headEr">
+							<a href="#">海外正品</a>
+							<a href="#">服务保障</a>
+							<a href="#">关税&清关</a>
+							<a class="last" href="#">身份证报关</a>
+						</p>
+					</li><span>|</span>
+					<li class="er_warp">
 						<a href="#">网站导航</a>
 						<em></em>
 						<div class="headEr clearfix">
@@ -170,143 +168,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</div>
 					</li>
-			</ul>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<!-- 搜索和logo -->
+	
+	<div class="mainArea">
+		<!-- 主要内容 -->
+		
+		<div class="content w1190 clearfix" style="margin-left:0px;">
+			<!-- 侧边 -->
+				<!-- 热卖排行榜 -->
+			<!-- 主要内容 -->
+			<div class="mianContent">
+				<!-- 商品筛选 -->
+				<!-- 筛选排序 -->
+				<!-- 商品内容 -->
+				<h3>收藏夹</h3>
+				<div class="product">
+					<ul class="clearfix">
+						<li>
+							<div class="hoverShow collect"><em></em>收藏</div>
+							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
+							<div class="show">
+								<a class="add" href="#">加入购物车</a>
+								<a class="contrast" href="#">商品对比</a>
+							</div>
+							<div class="proImg">
+								<a href="#">
+									<img class="lazy" src="js/lazyload/grey.gif" data-original="images/product2L.jpg" alt="">
+								</a>
+							</div>
+							<div class="proTxt">
+								<p><a href="#">Blackmores EPO月见草 澳洲澳佳宝 190粒...</a></p>
+								<p class="num">已售出1000件</p>
+								<p>
+									<strong>￥178.00</strong>
+									<s>￥256.00</s>
+								</p>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+				<!-- 底部页码 -->
+				<div class="footNum">
+					<ul>
+						<li class="pre"><a href="#">上一页</a></li>
+						<li class="num current"><a href="#">1</a></li>
+						<li class="num"><a href="#">2</a></li>
+						<li class="num"><a href="#">3</a></li>
+						<li class="last"><a href="#">下一页</a></li>
+						<li class="txt">向第</li>
+						<li class="ipt">
+							<input type="text">
+						</li>
+						<li><button>跳转</button></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
-</header>
-<!-- 搜索和logo -->
-<section class="boxS">
-	<div class="logoAndSearch w1190">
-		<!-- logo -->
-		<div class="logo">
-			<a href="#">澳猫网</a>
-		</div>
-		<div class="LAStxt">
-			提交订单
-		</div>
-		<!-- 流程 -->
-		<div class="flow">
-			<ul>
-				<li class="finish">1</li>
-				<em class="finished"></em>
-				<li class="finish">2</li>
-				<em class="finish"></em>
-				<li>3</li>
-				<em></em>
-				<li>4</li>
-			</ul>
-			<ol>
-				<li class="finish">我的购物车</li>
-				<li class="finish">提交订单</li>
-				<li>选择支付方式</li>
-				<li class="last">支付成功</li>
-			</ol>
-		</div>
-	</div>
-</section>
-<!-- 收货人信息 -->
-<div class="Consigneew boxS w1190">
-	<div class="Consignee clearfix">
-		<h3 class="Contitle">
-			收货人信息
-		</h3>
-		<ul class="address clearfix">
-			<li class="checkbox checked">
-				<p class="user">龙章辉</p>
-				<p class="site">湖南长沙市芙蓉区朝阳街街道车站北路凯旋大厦26楼，京途教育</p>
-				<p class="phonenum">18932479990</p>
-			</li>
-			<li class="checkbox">
-				<p class="user">龙章辉</p>
-				<p class="site">湖南长沙市芙蓉区朝阳街街道车站北路凯旋大厦26楼，京途教育</p>
-				<p class="phonenum">18932479990</p>
-			</li>
-		</ul>
-		<button>
-			+添加收货地址
-		</button>
-	</div>
-</div>
-<!-- 商品信息 -->
-<div class="Blurbw boxS w1190">
-	<div class="Blur">
-		<h3 class="Contitle">
-			确认商品信息
-		</h3>
-	<div class="BlurArea">
-		<h4>
-			<ul class="blur clearfix">
-				<li class="first">商品</li>
-				<li>数量</li>
-				<li>销售价</li>
-				<li>重量</li>
-				<li>关税</li>
-				<li>小计</li>
-			</ul>
-		</h4>
-		<div class="prouduct clearfix">
-			<ul class="blur clearfix">
-				<li class="first">
-				<p>【全球购】澳佳宝Blackmores儿童益脑多维矿物质咀嚼片60粒营养健康澳洲直邮</p>
-				</li>
-				<li>1</li>
-				<li>￥116.00</li>
-				<li>200g</li>
-				<li>￥114.0</li>
-				<li>￥116.00</li>
-			</ul>
-		</div>
-		<div class="freight Public clearfix">
-			<span class="left">
-				保税仓发货<b>0.00</b><em>免运费</em>
-			</span>
-			<span class="right">
-				<em>运费</em>
-				<em>￥0.00</em>
-			</span>
-		</div>
-		<div class="Coupon Public clearfix">
-			<span class="left">使用优惠券<s></s></span>
-			<span class="right">
-				<em>优惠金额</em>
-				<em>￥0.00</em>
-			</span>
-		</div>
-		<div class="Alladd Public clearfix">
-			<span class="right">
-				<em>合计</em>
-				<em class="r">￥116.00</em>
-			</span>
-		</div>
-	</div>
-	<div class="blurFooterw clearfix">
-		<div class="blurFooter">
-			<p class="privilege clearfix">
-				<span>优惠</span>
-				<span>-￥0.00</span>
-			</p>
-			<p class="privilege clearfix">
-				<span>运费</span>
-				<span>￥0.00</span>
-			</p>
-			<p class="privilege clearfix">
-				<span>关税</span>
-				<span>￥0.00</span>
-			</p>
-			<p class="submit clearfix">
-				<span>返回购物车</span>
-				<span>实付总额： <em>￥116.00</em></span>  
-				<a href="#">提交订单</a>  
-			</p>
-			<p class="protocol clearfix">
-				<span class="checkbox checked"></span>
-				<span>本人同意并接受《澳猫团海购服务协议》与《进口个人委托申报委托》</span>
-			</p>
-		</div>
-	</div>
-	</div>
-</div>
-
 	<!-- 底部 -->
 	<div class="foot">
 		<!-- 保证 -->
@@ -414,135 +337,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-<footer>
-	<div class="up">
-		<div class="txt  w1190">       
-			<ul>
-				<li><a target="_blank" href="#">关于澳猫海淘</a></li>
-				<li><a target="_blank" href="#">商家入驻</a></li>
-				<li><a target="_blank" href="#">网站合作</a></li>
-				<li><a target="_blank" href="#">友情链接</a></li>
-				<li><a target="_blank" href="#">澳猫公益</a></li>
-				<li><a target="_blank" href="#">法律声明</a></li>
-				<li><a target="_blank" href="#">诚聘英才</a></li>
-				<li><a target="_blank" href="#">联系我们</a></li>
-				<li><a target="_blank" href="#">网站地图</a></li>
-			</ul>
-			<ul>
-				<li><a target="_blank" href="#">澳猫云商</a></li>
-				<li><a target="_blank" href="#">澳洲澳猫</a></li><span>|</span>
-				<li><a target="_blank" href="#">康多多</a></li><span>|</span>
-				<li><a target="_blank" href="#">PPTV</a></li><span>|</span>
-				<li><a target="_blank" href="#">红孩子</a></li><span>|</span>
-				<li><a target="_blank" href="#">缤购</a></li><span>|</span>
-				<li><a target="_blank" href="#">乐购仕</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫物流</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫澳大利亚</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫新西兰</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫物流</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫澳大利亚</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫新西兰</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫物流</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫澳大利亚</a></li><span>|</span>
-				<li><a target="_blank" href="#">澳猫新西兰</a></li>
-			</ul>
-			<p>
-				澳大利亚Health more - 河南康多多贸易有限公司 - 河南澳蜜电子商务有限公司 版权所有<br>
-				Copyright © 20015-2018  澳猫aumalls.com 版权所有, 豫ICP备15030837号-1
-			</p>
-			<div class="ALLN"></div>
+	<footer>
+		<div class="up">
+			<div class="txt textWarp  w1190">       
+				<!-- <ul>
+					<li><a target="_blank" href="#">关于澳猫海淘</a></li>
+					<li><a target="_blank" href="#">商家入驻</a></li>
+					<li><a target="_blank" href="#">网站合作</a></li>
+					<li><a target="_blank" href="#">友情链接</a></li>
+					<li><a target="_blank" href="#">澳猫公益</a></li>
+					<li><a target="_blank" href="#">法律声明</a></li>
+					<li><a target="_blank" href="#">诚聘英才</a></li>
+					<li><a target="_blank" href="#">联系我们</a></li>
+					<li><a target="_blank" href="#">网站地图</a></li>
+				</ul>
+				<ul class="twoArea">
+					<li><a target="_blank" href="#">澳猫云商</a></li>
+					<li><a target="_blank" href="#">澳洲澳猫</a></li><span>|</span>
+					<li><a target="_blank" href="#">康多多</a></li><span>|</span>
+					<li><a target="_blank" href="#">PPTV</a></li><span>|</span>
+					<li><a target="_blank" href="#">红孩子</a></li><span>|</span>
+					<li><a target="_blank" href="#">缤购</a></li><span>|</span>
+					<li><a target="_blank" href="#">乐购仕</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫物流</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫澳大利亚</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫新西兰</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫物流</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫澳大利亚</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫新西兰</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫物流</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫澳大利亚</a></li><span>|</span>
+					<li><a target="_blank" href="#">澳猫新西兰</a></li>
+				</ul> -->
+				<p>
+					澳大利亚Health more - 河南康多多贸易有限公司 - 河南澳蜜电子商务有限公司 版权所有<br>
+					Copyright © 20015-2018  澳猫aumalls.com 版权所有, 豫ICP备15030837号-1
+				</p>
+				<div class="ALLN"></div>
+			</div>
 		</div>
-	</div>
-</footer>
-<!-- 模态窗口 -->
-<div class="mode">
-	<div class="modeArea">
-		<h4>新增地址</h4>
-		<p class="Rpeople">
-			<strong>
-				<em>*</em>
-				<span>收货人</span>
-			</strong>
-			<input class="w170" type="text" placeholder="限20个字">
-		</p>
-		<p class="Receiving">
-			<strong>
-				<em>*</em>
-				<span>收货地址</span>
-			</strong>
-			<select class="w370">
-    			<option>湖南 长沙市 芙蓉区 文艺路</option>
-				<option>湖南 长沙市 芙蓉区 文艺路</option>
-				<option>湖南 长沙市 芙蓉区 文艺路</option>
-    		</select>
-		</p>
-		<p class="Detailed">
-			<strong>
-				<em>*</em>
-				<span>详细地址</span>
-			</strong>
-			<input class="w370" type="text" placeholder="无需重复填写省市区，小于50个字">
-		</p>
-		<p class="IDcard">
-			<strong>
-				<span>身份证号</span>
-			</strong>
-			<input class="w370" type="text" placeholder="请填写收货人身份证信息">
-			<em>?
-				<u>
-					<b>
-						根据海关要求，购买跨境商品需实名认证，进行个人物品入境申报。因各保税区政策不同，郑州保税区需您提供收获人身份信息进行认证。其他报税区将通过支付平台实名信息进行入境申报，您可在支付平台进行认证（如已认证直接付款即可）。澳猫会对您的身份信息进行加密保管，绝不泄露！
-					</b>
-					有任何身份认证的问题请咨询我们<br>
-					400-115-8086<br>
-					09:00-24:00<br>
-				</u>
-			</em>
-		</p>
-		<p class="phonenum">
-			<strong>
-				<em>*</em>
-				<span>收集</span>
-			</strong>
-			<input class="w170" type="text" placeholder="请输入正确的手机号">
-		</p>
-		<p class="Tel">
-			<strong>
-				<span>固定电话</span>
-			</strong>
-			<input class="w170" type="text">
-		</p>
-		<p class="default">
-			<strong></strong>
-			<span class="checkbox"></span>
-			<span>设为默认地址</span>
-		</p>
-		<p class="sure">
-			<strong></strong>
-			<button>确定</button>
-			<a href="#">取消</a>
-		</p>
-		<p class="close">+</p>
-	</div>
-</div>
-<script src="js/jquery-1.7.2.min.js"></script>
-<script src="js/jquery.lazyload.min.js"></script>
-<script src="js/base.js"></script>
-<script>
-	// 提交订单
-	$(function() {
-		$('.protocol .checkbox').click(function(event) {
-			if ($(this).hasClass('checked')) {
-				$(this).removeClass('checked');
-				$('.submit a').css('background', '#999');
-				$('.submit a').removeAttr('href');
-			}else{
-				$(this).addClass('checked').siblings('li').removeClass('checked');
-				$('.submit a').css('background', 'rgb(211, 32, 89)');
-				$('.submit a').attr("href","#"); 
-			}
-		});
-	});
-</script>
+	</footer>
+	<script src="js/jquery-1.7.2.min.js"></script>
+	<script src="js/jquery.lazyload.min.js"></script>
+	<script src="js/base.js"></script>
 </body>
 </html>

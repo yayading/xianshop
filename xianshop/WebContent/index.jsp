@@ -7,7 +7,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-
 	if(request.getAttribute("gs")==null){
 		request.getRequestDispatcher("goods/list").forward(request, response);
 	}
@@ -15,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base herf="<%=basePath%>">
+    <base href="<%=basePath%>">
 	<meta charset="UTF-8">
 	<title>列表-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
@@ -82,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</li>
 					<span>|</span>
 					<li class="erWrap">
-						<a href="#">收藏夹</a>
+						<a href="collect/list">收藏夹</a>
 						<em></em>
 						<p class="headEr different">
 							<a href="#">收藏的宝贝</a>
@@ -772,7 +771,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					for(Goods g:gs){
 				%>
 					
-						<li>
+						<li style="margin-right:8px">
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
