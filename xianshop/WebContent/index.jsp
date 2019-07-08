@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base herf="<%=basePath%>">
+    <base href="<%=basePath%>">
 	<meta charset="UTF-8">
 	<title>列表-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
