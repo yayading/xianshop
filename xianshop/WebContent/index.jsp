@@ -220,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<!--购物车-->
-		<a href="cart/list" class="buy_car">
+		<a href="cart/list" target="_self" class="buy_car">
 			<p>购物车</p>
 			<em>0</em>
 		</a>
@@ -783,7 +783,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
-							<a class="add" href="cart/shopcart?pid=<%=g.getGoodsid() %>">加入购物车</a> <a class="contrast" href="#">商品对比</a>
+							<a class="add" target="_self" href="cart/shopcart?pid=<%=g.getGoodsid() %>" >加入购物车</a> <a class="contrast" href="#">商品对比</a>
 							</div>
 							<div class="proImg">
 								<a href="#">

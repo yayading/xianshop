@@ -12,5 +12,4 @@ public interface GoodsDAO {
 
 	@Select ("select * from goods")
 	public List<Goods> listGoods();
-	
 }

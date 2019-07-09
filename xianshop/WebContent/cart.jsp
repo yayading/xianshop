@@ -290,7 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </section>
 <!-- 订单部分 -->
-<div class="indent boxS">
+<div class="indent boxS" style="height:<%=request.getAttribute("shopcount") %>px">
 	<div class="indentAea w1190">
 	<!-- 全选标题部分 -->
 		<div class="IAhead">
@@ -305,6 +305,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li class="last">操作</li>
 			</ul>
 		</div> 
+		
 		<div class="IAbd">
 			<h4>
 				<span class="Allcheck checkbox"></span>
@@ -317,6 +318,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				%>
 				<li class="IAbdw">
 					<span class="lincheck checkbox"></span>
+					<input type="checkbox"  name="pid" value="<%=c.getGoodsid()%>"/>
 					<img src="<%=c.getGoodspic() %>" alt="">
 					<p>
 						<a class="pro" href="#"><%=c.getGoodsname() %></a>
@@ -345,14 +347,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="Lastprice">¥ <u><%=c.getGoodsprice()*sc.get(c) %></u></li>
 						<li class="last btn">
 							<button>移入收藏夹</button><br>
-							<button class="delet">删除</button>
+							<a class="delet"  href="javascript:deleteProduct(<%=c.getGoodsid() %>)">删除</a>
 						</li>
 					</ul>
 				</li>
-				
-				
 				<%} %>
 			</ul>
+			<script type="text/javascript">
+			function deleteProduct(pid){
+				if(window.confirm('确认删除这个商品吗')){
+					location.href='cart/delete?pid='+pid;
+				}
+			}
+			</script>
 <!-- 			<div class="account"> -->
 <!-- 				<ul> -->
 <!-- 					<li>活动优惠 ：-￥<u>0.00</u></li> -->
@@ -374,7 +381,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<em>订单关税：￥<u>0</u></em>
 				</p>
 			</div>
-		</div>                          
+		</div>         
+			<script type="text/javascript">
+			function chooseaction(pid){
+				if(window.confirm('确认删除这个商品吗')){
+					location.href='cart/delete?pid='+pid;
+				}
+			}
+			</script>            
 	</div>
 </div>
 <!-- 猜你喜欢和热门推荐 -->
