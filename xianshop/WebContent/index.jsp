@@ -7,9 +7,9 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-	if(request.getAttribute("gs")==null){
-		request.getRequestDispatcher("goods/list").forward(request, response);
-	}
+if(request.getAttribute("gs")==null){
+	request.getRequestDispatcher("goods/list").forward(request, response);
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,10 +81,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</li>
 					<span>|</span>
 					<li class="erWrap">
-						<a href="collect/list">收藏夹</a>
+						<a href="collect/list?page=1">收藏夹</a>
 						<em></em>
 						<p class="headEr different">
-							<a href="collect/list">收藏的宝贝</a>
+							<a href="collect/list?page=1">收藏的宝贝</a>
 							<a class="last" href="#">收藏的品牌</a>
 						</p>
 					</li>

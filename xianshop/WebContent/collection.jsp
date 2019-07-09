@@ -3,6 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+if(request.getAttribute("cl")==null){
+	request.getRequestDispatcher("collect/list?page=1").forward(request, response);
+}
+%>
+<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -17,6 +22,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/list.css">
 	<base target="_blank">
+	<script type="text/javascript">
+		function formsubmit(){
+			var pageform=document.getElementById("pageform");
+			var maxpage=<%=Integer.parseInt(request.getAttribute("maxpage").toString())%>;
+			var pagevalue=document.getElementById("pagenum").value;
+			if(isNaN(pagevalue)){
+				alert("请输入数字！");
+			}else if(pagevalue==''){
+				alert("页数不能为空！");
+			}else if((pagevalue>maxpage)||(pagevalue<1)){
+				alert("输入页数超出范围！");
+			}
+			else{
+				pageform.submit();
+			}
+		}
+	</script>
 </head>
 <body>
 	<header class="wrap-all">
@@ -230,16 +252,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 底部页码 -->
 				<div class="footNum">
 					<ul>
-						<li class="pre"><a href="#">上一页</a></li>
-						<li class="num current"><a href="#">1</a></li>
-						<li class="num"><a href="#">2</a></li>
-						<li class="num"><a href="#">3</a></li>
-						<li class="last"><a href="#">下一页</a></li>
+						<li class="pre">当前是第<%=request.getAttribute("page")%>页，共<%=request.getAttribute("maxpage")%>页></li>
+						<li class="pre"><a href="collect/list?page=1" target="_self">首页</a></li>
+						<li class="pre"><a href="collect/list?page=<%=request.getAttribute("previouspage")%>" target="_self">上一页</a></li>
+						<%
+							int maxpage=Integer.parseInt(request.getAttribute("maxpage").toString());
+							int i=1;
+							int pagenow=Integer.parseInt(request.getAttribute("page").toString());
+							int startpage=((pagenow-1)/5)*5+1;
+							for(i=startpage;i<=maxpage&&i<=startpage+4;i++){
+						%>
+								<%if(i==pagenow){%>
+									<li class="num current"><a href="collect/list?page=<%=i%>" target="_self"><%=i%></a></li>
+								<%}else{%>
+										<li class="num"><a href="collect/list?page=<%=i%>" target="_self"><%=i%></a></li>
+									<%}%>
+								<%}%>
+						<li class="last"><a href="collect/list?page=<%=request.getAttribute("nextpage")%>" target="_self">下一页</a></li>
+						<li class="last"><a href="collect/list?page=<%=request.getAttribute("maxpage")%>" target="_self">尾页</a></li>
 						<li class="txt">向第</li>
+						<li><form method="post" action="collect/list" id="pageform">
 						<li class="ipt">
-							<input type="text">
+							<input type="text" name="page" id="pagenum">
 						</li>
-						<li><button>跳转</button></li>
+						</form></li>
+						<li><button type="button" onclick="formsubmit()">跳转</button></li>
 					</ul>
 				</div>
 			</div>

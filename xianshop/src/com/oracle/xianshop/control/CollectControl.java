@@ -23,14 +23,24 @@ public class CollectControl {
 	@Autowired
 	private CollectDAO dao;
 	@RequestMapping("/list")
-	public String listGoods(Model m,HttpSession session){
+	public String listGoods(Model m,HttpSession session,int page){
 		Users user=(Users)session.getAttribute("logineduser");
 		if(user==null){
 			return "login";
 		}
 		int userid=user.getUserid();
-		List<Goods> gs=dao.listGoods(userid);
+		int count=12;
+		int startindex=(page-1)*count;
+		int collections=dao.countCollect(userid);
+		int maxpage=((collections-1)/count)+1;
+		int previouspage=page-1==0?page:page-1;
+		int nextpage=page==maxpage?page:page+1;
+		List<Goods> gs=dao.listGoods(userid,startindex,count);
 		m.addAttribute("cl",gs);
+		m.addAttribute("previouspage",previouspage);
+		m.addAttribute("nextpage",nextpage);
+		m.addAttribute("maxpage",maxpage);
+		m.addAttribute("page",page);
 		return "collection";
 	}
 	@RequestMapping("/add")
@@ -45,13 +55,13 @@ public class CollectControl {
 			return "index";
 		}
 		int g=dao.addCollect(time, gid, uid);
-		return "redirect:list";
+		return "redirect:list?page=1";
 	}
 	@RequestMapping("/del")
 	public String delCollect(int gid,HttpSession session){
 		Users user=(Users)session.getAttribute("logineduser");
 		int uid=user.getUserid();
 		int l=dao.delCollect(gid, uid);
-		return "redirect:list";
+		return "redirect:list?page=1";
 	}
 }
