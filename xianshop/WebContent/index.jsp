@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%
 
 	if(request.getAttribute("gs")==null){
-		request.getRequestDispatcher("goods/list").forward(request, response);
+		request.getRequestDispatcher("goods/list?page=1").forward(request, response);
 	}
 %>
 <!DOCTYPE html>
@@ -24,6 +24,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/list.css">
 	<base target="_blank">
 </head>
+<script>
+	function jumppage()
+	{
+		var inputp=document.getElementById("inputpage").value;
+		int p = parsenInt(inputp);
+		system.out.print("p");
+		window.location.href="goods/list?page=p";
+	}
+</script>
 <body>
 	<header class="wrap-all">
 		<div class="head center_1200">
@@ -769,7 +778,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul class="clearfix">
 				<% 
 					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
-					for(Goods g:gs){
+					for(Goods  g:gs){
 				%>
 					
 						<li style="margin-right:8px">
@@ -801,17 +810,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<!-- 底部页码 -->
 				<div class="footNum">
-					<ul>
-						<li class="pre"><a href="#">上一页</a></li>
-						<li class="num current"><a href="#">1</a></li>
-						<li class="num"><a href="#">2</a></li>
-						<li class="num"><a href="#">3</a></li>
-						<li class="last"><a href="#">下一页</a></li>
+										<ul>
+					<li class="pre">当前第<%=request.getAttribute("nowPage") %>页/总共<%=request.getAttribute("allPage") %>,每页<%=request.getAttribute("count") %>条/总共<%=request.getAttribute("allCount") %>条</li>
+						<li class="pre"><a target="_self" href="goods/list?page=1">首页</a></li>
+						<li class="pre"><a target="_self" href="goods/list?page=<%=request.getAttribute("perviousPage") %>">上一页</a></li>
+<!-- 						<li class="num current"><a href="#">1</a></li> -->
+<!-- 						<li class="num"><a href="#">2</a></li> -->
+<!-- 						<li class="num"><a href="#">3</a></li> -->
+						<li class="last"><a target="_self" href="goods/list?page=<%=request.getAttribute("nextPage") %>">下一页</a></li>
+						<li class="last"><a target="_self" href="goods/list?page=<%=request.getAttribute("allPage") %>">尾页</a></li>
 						<li class="txt">向第</li>
-						<li class="ipt">
-							<input type="text">
-						</li>
-						<li><button>跳转</button></li>
+						<li class="ipt"><input id ="inputpage" type="text" onchange="if(/\D/.test(this.value)){alert('只能输入数字');this.value=' ';}"></li>
+						<li><button onclick="jumppage()">跳转</button></li>
+		
 					</ul>
 				</div>
 			</div>
