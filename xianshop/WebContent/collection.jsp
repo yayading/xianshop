@@ -21,10 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/list.css">
+	<script src="js/jquery-1.7.2.min.js"></script> 
 	<base target="_blank">
 	<script type="text/javascript">
 		function formsubmit(){
-			var pageform=document.getElementById("pageform");
+			//var pageform=document.getElementById("pageform");
 			var maxpage=<%=Integer.parseInt(request.getAttribute("maxpage").toString())%>;
 			var pagevalue=document.getElementById("pagenum").value;
 			if(isNaN(pagevalue)){
@@ -35,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				alert("输入页数超出范围！");
 			}
 			else{
-				pageform.submit();
+				window.location.href='collect/list?page='+pagevalue;
 			}
 		}
 	</script>
@@ -252,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 底部页码 -->
 				<div class="footNum">
 					<ul>
-						<li class="pre">当前是第<%=request.getAttribute("page")%>页，共<%=request.getAttribute("maxpage")%>页></li>
+						<li class="pre">当前是第<%=request.getAttribute("page")%>页，共<%=request.getAttribute("maxpage")%>页</li>
 						<li class="pre"><a href="collect/list?page=1" target="_self">首页</a></li>
 						<li class="pre"><a href="collect/list?page=<%=request.getAttribute("previouspage")%>" target="_self">上一页</a></li>
 						<%

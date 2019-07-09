@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oracle.xianshop.model.dao.CollectDAO;
 import com.oracle.xianshop.model.dao.UserDAO;
@@ -63,5 +64,28 @@ public class CollectControl {
 		int uid=user.getUserid();
 		int l=dao.delCollect(gid, uid);
 		return "redirect:list?page=1";
+	}
+	@ResponseBody
+	@RequestMapping("/addajax")
+	public String addCollectAjax(int gid,HttpSession session){
+		Users user=(Users)session.getAttribute("logineduser");
+		int uid=user.getUserid();
+		Date date=new Date();
+		DateFormat df=DateFormat.getDateTimeInstance();
+		String time=df.format(date);
+		int judge=dao.judgeCollect(gid, uid);
+		if(judge!=0){
+			return "index";
+		}
+		int g=dao.addCollect(time, gid, uid);
+		return "succeed";
+	}
+	@ResponseBody
+	@RequestMapping("/delajax")
+	public String delCollectAjax(int gid,HttpSession session){
+		Users user=(Users)session.getAttribute("logineduser");
+		int uid=user.getUserid();
+		int l=dao.delCollect(gid, uid);
+		return "succeed";
 	}
 }

@@ -22,6 +22,40 @@ if(request.getAttribute("gs")==null){
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/list.css">
 	<base target="_blank">
+	<script src="js/jquery-1.7.2.min.js"></script> 
+	<script type="text/javascript">
+		function setCollection(n){
+			if(n.className=="fish"){
+				$(function(){
+		        	$.ajax({
+		            	type : "POST",
+		            	url : "collect/delajax?gid="+n.id,
+		            	async:true,
+		            	success : function(result) {
+		                	alert("取消收藏成功");
+		            	},
+		            	error : function(e){
+		            		alert(e);
+		            	}
+		       	 	});
+		    	});
+			}else{
+				$(function(){
+		        	$.ajax({
+		            	type : "POST",
+		            	url : "collect/addajax?gid="+n.id,
+		            	async:true,
+		            	success : function(result) {
+		                	alert("添加收藏成功");
+		            	},
+		            	error : function(e){
+		            		
+		            	}
+		       	 	});
+		    	});
+			}
+		}
+	</script>
 </head>
 <body>
 	<header class="wrap-all">
@@ -770,10 +804,14 @@ if(request.getAttribute("gs")==null){
 					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
 					for(Goods g:gs){
 				%>
-					
+				
 						<li style="margin-right:8px">
-							<a class="hoverShow collect" href="collect/add?gid=<%=g.getGoodsid() %>">收藏</a>
-							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
+						<%if(g.getIscollect()==0){ %>
+						<div class="hoverShow collect"><em id=<%=g.getGoodsid() %> onclick="setCollection(this)"></em>收藏</div>
+						<%}else{ %>
+						<div class="hoverShow collect"><em id=<%=g.getGoodsid() %> class="fish" onclick="setCollection(this)"></em>收藏</div>
+						<%} %>
+							<!-- <a class="hoverShow collect" href="collect/add?gid=<%=g.getGoodsid() %>">收藏</a>-->
 							<div class="show">
 								<a class="add" href="#">加入购物车</a>
 								<a class="contrast" href="#">商品对比</a>
