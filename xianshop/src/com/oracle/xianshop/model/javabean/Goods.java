@@ -34,6 +34,7 @@ public class Goods implements Serializable {
 	/**
 	 * 僐儞僗僩儔僋�?.
 	 */
+	private int iscollect=0;
 	public Goods() {
 	}
 
@@ -201,6 +202,14 @@ public class Goods implements Serializable {
 				+ getGoodspic() + ", hashCode()=" + hashCode()
 				+ ", getClass()=" + getClass() + ", toString()="
 				+ super.toString() + "]";
+	}
+
+	public int getIscollect() {
+		return iscollect;
+	}
+
+	public void setIscollect(int iscollect) {
+		this.iscollect = iscollect;
 	}
 
 }

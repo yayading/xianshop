@@ -45,6 +45,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				location.href="goods/list?page="+pagevalue;
 			}
 		}
+    unction setCollection(n){
+			if(n.className=="fish"){
+				$(function(){
+		        	$.ajax({
+		            	type : "POST",
+		            	url : "collect/delajax?gid="+n.id,
+		            	async:true,
+		            	success : function(result) {
+		                	alert("取消收藏成功");
+		            	},
+		            	error : function(e){
+		            		alert(e);
+		            	}
+		       	 	});
+		    	});
+			}else{
+				$(function(){
+		        	$.ajax({
+		            	type : "POST",
+		            	url : "collect/addajax?gid="+n.id,
+		            	async:true,
+		            	success : function(result) {
+		                	alert("添加收藏成功");
+		            	},
+		            	error : function(e){
+		            		
+		            	}
+		       	 	});
+		    	});
+			}
+		}
+		function addNum(n){
+			var strr=n.id;
+			var str=strr.split("_");
+			var id=str[1];
+			var id2=document.getElementById("shopnumcar");
+			$(function(){
+	        	$.ajax({
+	            	type : "POST",
+	            	url : "cart/addshopcart?pid="+id,
+	            	async:true,
+	            	success : function(result) {
+	            		id2.innerHTML=result;
+	                	alert("添加成功");
+	            	},
+	            	error : function(e){
+	            		alert("失败");
+	            	}
+	       	 	});
+	    	});
+		}
 	</script>
 <body>
 	<header class="wrap-all">
@@ -60,11 +111,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 					<div class="user">
 					<% if(session.getAttribute("logineduser")==null){ %>
-						<a  href="login.jsp">登录</a> <span>|</span> <a
-						target="_blank" href="#">免费注册</a>
+						<a target="self" href="login.jsp">登录</a> <span>|</span> <a
+						target="_self" href="register.jsp">免费注册</a>
 						<%}else{ %>
+						<img src="images/xian.png"  
+						style="width: 16px;height: 16px;border-radius:8px;border:1px solid black;margin-left: 5px;margin-right: 5px;position: relative;top: 5px;box-shadow:0px 0px 2px green"/>
 							欢迎您：<B style="text-shadow: 0px 0px 1px green"><%=((Users)session.getAttribute("logineduser")).getNicheng() %></B>!
-							<a href="">安全退出</a>
+							<a target="self" href="user/loginout">安全退出</a>
 							<%
 						} %>
 				</div>
@@ -243,12 +296,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--购物车-->
 		<a href="cart/list" target="_self" class="buy_car">
 			<p>购物车</p>
-			<% if(session.getAttribute("logineduser")==null){ %>
-						<em>0</em>
-						<%}else{ %>
-						<em><%=request.getAttribute("count")%></em>
-							<%
-						} %>
+			<em id="shopnumcar"><%=request.getAttribute("sp")==null?0:request.getAttribute("sp")%></em>
 		</a>
 		<!-- 新会员 -->
 		<div class="app">
@@ -809,7 +857,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
-								<a class="add" target="_self" href="cart/shopcart?pid=<%=g.getGoodsid() %>" >加入购物车</a>
+								<a class="add" target="_self" onclick="addNum(this)" id="<%="gid_"+g.getGoodsid() %>" >加入购物车</a>
 								<a class="contrast" href="comp/add?pid=<%=g.getGoodsid() %>">商品对比</a>
 							</div>
 							<div class="proImg">
@@ -1016,4 +1064,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="js/jquery.lazyload.min.js"></script>
 	<script src="js/base.js"></script>
 </body>
+
 </html>

@@ -14,8 +14,9 @@ public class Orders implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** 订单编号. */
-	private Integer orderid;
-
+	private String orderid;
+	
+	private String name;
 	/** 下单时间. */
 	private String orderdate;
 
@@ -43,7 +44,7 @@ public class Orders implements Serializable {
 	 * @param orderid
 	 *            订单编号
 	 */
-	public void setOrderid(Integer orderid) {
+	public void setOrderid(String orderid) {
 		this.orderid = orderid;
 	}
 
@@ -52,7 +53,7 @@ public class Orders implements Serializable {
 	 * 
 	 * @return 订单编号
 	 */
-	public Integer getOrderid() {
+	public String getOrderid() {
 		return this.orderid;
 	}
 
@@ -187,6 +188,14 @@ public class Orders implements Serializable {
 		}
 
 		return true;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

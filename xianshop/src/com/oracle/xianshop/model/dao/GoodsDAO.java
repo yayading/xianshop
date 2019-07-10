@@ -1,3 +1,4 @@
+
 package com.oracle.xianshop.model.dao;
 
 import java.util.List;
@@ -21,5 +22,11 @@ public interface GoodsDAO {
  */
 	@Select("select count(*) from goods")
 	public int getAllCountOfGoods();
+  @Select ("select * from goods;")
+	public List<Goods> listGoodsAll();
+  
+  @Select ("select GOODSID,GOODSNAME,GOODSTYPE,GOODSPRICE,GOODSNUMBER,GOODSPIC,IF(GOODSID IN(SELECT GOODSID FROM collectors WHERE USERID=#{userid}),1,0) as iscollect from goods;")
+	public List<Goods> listGoods(@Param("userid") int userid);
 
 }
+

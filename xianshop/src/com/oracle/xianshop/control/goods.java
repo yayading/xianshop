@@ -1,3 +1,4 @@
+
 package com.oracle.xianshop.control;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class goods {
 	
 	@Autowired
 	private GoodsDAO dao;
+  @Autowired
+	private CartDAO dao2;
 	
 
 	/**
@@ -26,8 +29,19 @@ public class goods {
 	public String listProduct(Model  m,int page){
 		System.out.println("这是进入了后台的方法");
 		int count=20;//后台规定的每页分的条数
-		List<Goods>  gs=dao.listGoods((page-1)*count,count);
-		m.addAttribute("gs", gs);//将后台DAO查询出来的一个集合里面的商品信息存储到一个盒子里
+    	@RequestMapping("/list")
+	public String listGoods(Model m,HttpSession session){
+		Users user=(Users)session.getAttribute("logineduser");
+		if(user==null){
+      List<Goods>  gs=dao.listGoods((page-1)*count,count);
+		  m.addAttribute("gs", gs);//将后台DAO查询出来的一个集合里面的商品信息存储到一个盒子里
+		}else{
+			int userid=user.getUserid();
+			int shopcount=dao2.getAllCountOfShopcart(userid);
+			List<Goods> gs=dao.listGoods(userid);
+			m.addAttribute("sp",shopcount);
+		}
+
 		
 		int allCount=dao.getAllCountOfGoods();//查询数据库获取总行数
 		int allPage=allCount%count==0?allCount/count:allCount/count+1;//总页数
@@ -39,8 +53,8 @@ public class goods {
 		m.addAttribute("nowPage", page);
 		m.addAttribute("allCount", allCount);
 		m.addAttribute("count", count);
-		
-		return "index";
+    
+    return "index";
 	}
 
 

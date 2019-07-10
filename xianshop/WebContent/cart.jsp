@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
@@ -341,7 +342,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 						<li class="num">
 							<span class="reduce">-</span>
-							<input type="text" value="<%=sc.get(c) %>">
+							<input type="text" name="count" value="<%=sc.get(c) %>">
 							<span class="add">+</span>
 						</li>
 						<li class="Lastprice">¥ <u><%=c.getGoodsprice()*sc.get(c) %></u></li>
@@ -360,20 +361,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			}
 			</script>
-<!-- 			<div class="account"> -->
-<!-- 				<ul> -->
-<!-- 					<li>活动优惠 ：-￥<u>0.00</u></li> -->
-<!-- 					<li>商品应付总计 ：￥<u>114.00</u></li> -->
-<!-- 					<li class="main">免关税</li> -->
-<!-- 					<li class="mprice">￥<u>11.4</u></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
+		    <div class="account">
+				<ul>
+					<li>收货人:<input type="text" name="name" style="height: 25px;font-size: 14px;box-shadow:0px 0px 3px orange"/></li>
+					<li>收货地址:<input type="text" name="address" style="height: 25px;font-size: 14px;width: 400px;box-shadow:0px 0px 3px orange"/></li>
+					<li>备注:<input type="text" name="remark" style="height: 25px;font-size: 14px;width: 400px;box-shadow:0px 0px 3px orange"/></li>
+				</ul>
+			</div>
 			<div class="IAbdfoot">
 				<span class="checkbox Allcheck"></span>
 				<span>全选</span>
 				<input type="submit"  value="删除所选物品" onclick="flag=1"/>
 				<input type="submit"  value="提交订单" onclick="flag=0"/>
-
 				<p>
 					<strong>已选商品<b id="allnum"> 1 </b>件</strong>
 					<strong>总价（不含运费）：<b>￥<u id="allpri">114.00</u></b></strong><br>
@@ -388,7 +387,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var flag=0;
 			function chooseaction(){
 				if(flag==0){
-
 					var a=document.getElementById("choose");
 					a.setAttribute("action","order/add");
 				}

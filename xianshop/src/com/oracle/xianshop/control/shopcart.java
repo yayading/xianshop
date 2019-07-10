@@ -1,3 +1,4 @@
+
 package com.oracle.xianshop.control;
 
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oracle.xianshop.model.javabean.Goods;
 import com.oracle.xianshop.model.javabean.Shopcart;
@@ -70,7 +72,6 @@ public class shopcart {
 		return "cart";
 		}
 	}
-
 	@RequestMapping("/delete")
 	public String deleteCars(int pid,HttpSession session){
 		int userid=((Users)session.getAttribute("logineduser")).getUserid();
@@ -78,7 +79,6 @@ public class shopcart {
 		System.out.println(check+"check");
 		return "redirect:list";
 	}
-
 	@RequestMapping("/deletechoose")
 	public String deleteChooseCars(int []pid,HttpSession session){
 		int userid=((Users)session.getAttribute("logineduser")).getUserid();
@@ -86,5 +86,27 @@ public class shopcart {
 			int check=dao.deleteCartShops(userid,h);
 		}
 		return "redirect:list";
+	}
+	
+	//
+	@ResponseBody
+	@RequestMapping("/addshopcart")
+	public String addProductToCars(int pid,HttpSession session){
+		if(session.getAttribute("logineduser")==null){
+			return "fail";
+		}else{
+	
+			int userid=((Users)session.getAttribute("logineduser")).getUserid();
+			Shopcart sp=dao.numGoods(userid,pid);
+			if(sp==null){
+				int result=dao.addGoods(userid, pid);
+			}
+			else{
+				int result=dao.addnumGoods(userid, pid);
+			}
+			int shopcount=dao.getAllCountOfShopcart(userid);
+			String str=String.valueOf(shopcount);
+			return str;
+		}
 	}
 }
