@@ -1,5 +1,7 @@
-<%@page import="com.oracle.xianshop.model.javabean.Users"%>
+
+<%@page import="com.oracle.xianshop.model.javabean.Shopcart"%>
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
+<%@page import="com.oracle.xianshop.model.javabean.Users"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,9 +10,11 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-if(request.getAttribute("gs")==null){
-	request.getRequestDispatcher("goods/list").forward(request, response);
-}
+
+
+	if(request.getAttribute("gs")==null){
+		request.getRequestDispatcher("goods/list?page=1").forward(request, response);
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +27,25 @@ if(request.getAttribute("gs")==null){
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/list.css">
 	<base target="_blank">
-	<script src="js/jquery-1.7.2.min.js"></script> 
+</head>
+
 	<script type="text/javascript">
-		function setCollection(n){
+		function formsubmit(){
+			//var pageform=document.getElementById("pageform");
+			var maxpage=<%=Integer.parseInt(request.getAttribute("allPage").toString())%>;
+			var pagevalue=document.getElementById("pagenum").value;
+			if(isNaN(pagevalue)){
+				alert("请输入数字！");
+			}else if(pagevalue==''){
+				alert("页数不能为空！");
+			}else if((pagevalue>maxpage)||(pagevalue<1)){
+				alert("输入页数超出范围！");
+			}
+			else{
+				location.href="goods/list?page="+pagevalue;
+			}
+		}
+    unction setCollection(n){
 			if(n.className=="fish"){
 				$(function(){
 		        	$.ajax({
@@ -77,7 +97,6 @@ if(request.getAttribute("gs")==null){
 	    	});
 		}
 	</script>
-</head>
 <body>
 	<header class="wrap-all">
 		<div class="head center_1200">
@@ -90,7 +109,7 @@ if(request.getAttribute("gs")==null){
 						<span>嗨，澳猫欢迎你！</span>
 					</a>
 				</div>
-				<div class="user">
+					<div class="user">
 					<% if(session.getAttribute("logineduser")==null){ %>
 						<a target="self" href="login.jsp">登录</a> <span>|</span> <a
 						target="_self" href="register.jsp">免费注册</a>
@@ -143,10 +162,10 @@ if(request.getAttribute("gs")==null){
 					</li>
 					<span>|</span>
 					<li class="erWrap">
-						<a href="collect/list?page=1">收藏夹</a>
+						<a href="#">收藏夹</a>
 						<em></em>
 						<p class="headEr different">
-							<a href="collect/list?page=1">收藏的宝贝</a>
+							<a href="#">收藏的宝贝</a>
 							<a class="last" href="#">收藏的品牌</a>
 						</p>
 					</li>
@@ -830,20 +849,16 @@ if(request.getAttribute("gs")==null){
 					<ul class="clearfix">
 				<% 
 					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
-					for(Goods g:gs){
+
+					for(Goods  g:gs){
 				%>
-				
+					
 						<li style="margin-right:8px">
-						
-						<%if(g.getIscollect()==0){ %>
-						<div class="hoverShow collect"><em id=<%=g.getGoodsid() %> onclick="setCollection(this)"></em>收藏</div>
-						<%}else{ %>
-						<div class="hoverShow collect"><em id=<%=g.getGoodsid() %> class="fish" onclick="setCollection(this)"></em>收藏</div>
-						<%} %>
-							<!-- <a class="hoverShow collect" href="collect/add?gid=<%=g.getGoodsid() %>">收藏</a>-->
+							<div class="hoverShow collect"><em></em>收藏</div>
+							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
 								<a class="add" target="_self" onclick="addNum(this)" id="<%="gid_"+g.getGoodsid() %>" >加入购物车</a>
-								<a class="contrast" href="#">商品对比</a>
+								<a class="contrast" href="comp/add?pid=<%=g.getGoodsid() %>">商品对比</a>
 							</div>
 							<div class="proImg">
 								<a href="#">
@@ -868,16 +883,31 @@ if(request.getAttribute("gs")==null){
 				<!-- 底部页码 -->
 				<div class="footNum">
 					<ul>
-						<li class="pre"><a href="#">上一页</a></li>
-						<li class="num current"><a href="#">1</a></li>
-						<li class="num"><a href="#">2</a></li>
-						<li class="num"><a href="#">3</a></li>
-						<li class="last"><a href="#">下一页</a></li>
+						<li class="pre">当前是第<%=request.getAttribute("nowPage")%>页，共<%=request.getAttribute("allPage")%>页</li>
+						<li class="pre"><a href="goods/list?page=1" target="_self">首页</a></li>
+						<li class="pre"><a href="goods/list?page=<%=request.getAttribute("perviousPage")%>" target="_self">上一页</a></li>
+						<%
+							int maxpage=Integer.parseInt(request.getAttribute("allPage").toString());
+							int i=1;
+							int pagenow=Integer.parseInt(request.getAttribute("nowPage").toString());
+							int startpage=((pagenow-1)/5)*5+1;
+							for(i=startpage;i<=maxpage&&i<=startpage+4;i++){
+						%>
+								<%if(i==pagenow){%>
+									<li class="num current"><a href="goods/list?page=<%=i%>" target="_self"><%=i%></a></li>
+								<%}else{%>
+										<li class="num"><a href="goods/list?page=<%=i%>" target="_self"><%=i%></a></li>
+									<%}%>
+								<%}%>
+						<li class="last"><a href="goods/list?page=<%=request.getAttribute("nextPage")%>" target="_self">下一页</a></li>
+						<li class="last"><a href="goods/list?page=<%=request.getAttribute("allPage")%>" target="_self">尾页</a></li>
 						<li class="txt">向第</li>
+						<li><form method="post" action="goods/list" id="pageform">
 						<li class="ipt">
-							<input type="text">
+							<input type="text" name="page" id="pagenum">
 						</li>
-						<li><button>跳转</button></li>
+						</form></li>
+						<li><button type="button" onclick="formsubmit()">跳转</button></li>
 					</ul>
 				</div>
 			</div>
@@ -1034,4 +1064,5 @@ if(request.getAttribute("gs")==null){
 	<script src="js/jquery.lazyload.min.js"></script>
 	<script src="js/base.js"></script>
 </body>
+
 </html>

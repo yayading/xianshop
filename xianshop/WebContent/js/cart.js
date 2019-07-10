@@ -1,5 +1,5 @@
 $(function() {
-	// 购物车的复选框全选
+	// 璐墿杞︾殑澶嶉�夋鍏ㄩ��
 	$('.Allcheck').click(function(event) {
 		if ($(this).hasClass('checked')) {
 			$(this).removeClass('checked');
@@ -33,11 +33,11 @@ $(function() {
 				setTotal(); 
 			};
 	});
-	// 删除
+	// 鍒犻櫎
 	$('.IAbdw .delet').click(function(event) {
 		$(this).parentsUntil('.IAbdArea').remove();
 	});
-	// 购物车金额结算
+	// 璐墿杞﹂噾棰濈粨绠�
 	$('.IAul .reduce').click(function(event) {
 		var n=parseFloat($(this).siblings('input').val());
 		n--;

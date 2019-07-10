@@ -1,3 +1,4 @@
+
 package com.oracle.xianshop.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -31,6 +32,3 @@ public interface UserDAO {
 	public int lname(@Param("username")String username);
 	
 }
-
-	
-	

@@ -20,7 +20,7 @@ body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;
 body{background:#fff;}
 a{color: #00A9ED;}
 a:hover{color:#00aaee;}
-/*清除浮动*/
+/*娓呴櫎娴姩*/
 .clearfix:after { content:"."; display:block; height:0; visibility:hidden; clear:both; }
 .clearfix { zoom:1; }
 .clearfix:before { clear:both; height:0; font-size:0; overflow:hidden; }
@@ -68,7 +68,7 @@ html,body{
 .b{
 	background: #00AAEE;
 }/* 
-小桌面
+灏忔闈�
 @media screen and (min-width: 992px) and (max-width:1200px){
 	.textWarp{
 		width:950px;

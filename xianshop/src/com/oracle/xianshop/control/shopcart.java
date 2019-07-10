@@ -1,3 +1,4 @@
+
 package com.oracle.xianshop.control;
 
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class shopcart {
 		if(session.getAttribute("logineduser")==null){
 			return "login";
 		}else{
-		//从session中获取登录的用户编号
+		//浠巗ession涓幏鍙栫櫥褰曠殑鐢ㄦ埛缂栧彿
 		int userid=((Users)session.getAttribute("logineduser")).getUserid();
 		Map<Goods, Integer> detailCars=new HashMap<>();
 		List<Shopcart> sc=dao.listCartsByUserId(userid);
@@ -66,7 +67,7 @@ public class shopcart {
 		}
 		System.out.println(sc);
 		m.addAttribute("sc", detailCars);
-		//行数
+		//琛屾暟
 		
 		return "cart";
 		}
