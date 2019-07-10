@@ -13,5 +13,7 @@ public interface GoodsDAO {
 
 	@Select ("select GOODSID,GOODSNAME,GOODSTYPE,GOODSPRICE,GOODSNUMBER,GOODSPIC,IF(GOODSID IN(SELECT GOODSID FROM collectors WHERE USERID=#{userid}),1,0) as iscollect from goods;")
 	public List<Goods> listGoods(@Param("userid") int userid);
+	@Select ("select * from goods;")
+	public List<Goods> listGoodsAll();
 	
 }

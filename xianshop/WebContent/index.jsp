@@ -1,3 +1,4 @@
+<%@page import="com.oracle.xianshop.model.javabean.Users"%>
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -55,6 +56,26 @@ if(request.getAttribute("gs")==null){
 		    	});
 			}
 		}
+		function addNum(n){
+			var strr=n.id;
+			var str=strr.split("_");
+			var id=str[1];
+			var id2=document.getElementById("shopnumcar");
+			$(function(){
+	        	$.ajax({
+	            	type : "POST",
+	            	url : "cart/addshopcart?pid="+id,
+	            	async:true,
+	            	success : function(result) {
+	            		id2.innerHTML=result;
+	                	alert("添加成功");
+	            	},
+	            	error : function(e){
+	            		alert("失败");
+	            	}
+	       	 	});
+	    	});
+		}
 	</script>
 </head>
 <body>
@@ -70,9 +91,16 @@ if(request.getAttribute("gs")==null){
 					</a>
 				</div>
 				<div class="user">
-					<a target="_blank" href="#">登录</a>
-					<span>|</span>
-					<a target="_blank" href="#">免费注册</a>
+					<% if(session.getAttribute("logineduser")==null){ %>
+						<a target="self" href="login.jsp">登录</a> <span>|</span> <a
+						target="_self" href="register.jsp">免费注册</a>
+						<%}else{ %>
+						<img src="images/xian.png"  
+						style="width: 16px;height: 16px;border-radius:8px;border:1px solid black;margin-left: 5px;margin-right: 5px;position: relative;top: 5px;box-shadow:0px 0px 2px green"/>
+							欢迎您：<B style="text-shadow: 0px 0px 1px green"><%=((Users)session.getAttribute("logineduser")).getNicheng() %></B>!
+							<a target="self" href="user/loginout">安全退出</a>
+							<%
+						} %>
 				</div>
 				<div class="phone">
 					<a href="#">
@@ -247,9 +275,9 @@ if(request.getAttribute("gs")==null){
 			</div>
 		</div>
 		<!--购物车-->
-		<a href="#" class="buy_car">
+		<a href="cart/list" target="_self" class="buy_car">
 			<p>购物车</p>
-			<em>0</em>
+			<em id="shopnumcar"><%=request.getAttribute("sp")==null?0:request.getAttribute("sp")%></em>
 		</a>
 		<!-- 新会员 -->
 		<div class="app">
@@ -806,6 +834,7 @@ if(request.getAttribute("gs")==null){
 				%>
 				
 						<li style="margin-right:8px">
+						
 						<%if(g.getIscollect()==0){ %>
 						<div class="hoverShow collect"><em id=<%=g.getGoodsid() %> onclick="setCollection(this)"></em>收藏</div>
 						<%}else{ %>
@@ -813,7 +842,7 @@ if(request.getAttribute("gs")==null){
 						<%} %>
 							<!-- <a class="hoverShow collect" href="collect/add?gid=<%=g.getGoodsid() %>">收藏</a>-->
 							<div class="show">
-								<a class="add" href="#">加入购物车</a>
+								<a class="add" target="_self" onclick="addNum(this)" id="<%="gid_"+g.getGoodsid() %>" >加入购物车</a>
 								<a class="contrast" href="#">商品对比</a>
 							</div>
 							<div class="proImg">
