@@ -373,6 +373,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span>全选</span>
 				<input type="submit"  value="删除所选物品" onclick="flag=1"/>
 				<input type="submit"  value="提交订单" onclick="flag=0"/>
+
 				<p>
 					<strong>已选商品<b id="allnum"> 1 </b>件</strong>
 					<strong>总价（不含运费）：<b>￥<u id="allpri">114.00</u></b></strong><br>
@@ -387,6 +388,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var flag=0;
 			function chooseaction(){
 				if(flag==0){
+
 					var a=document.getElementById("choose");
 					a.setAttribute("action","order/add");
 				}
