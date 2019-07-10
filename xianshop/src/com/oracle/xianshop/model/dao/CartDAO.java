@@ -34,4 +34,9 @@ public interface CartDAO {
 		
 		@Select("select count(*) from shopcart where userid=#{userid}")
 		public int getAllCountOfShopcart(@Param("userid")int userid);
+
+	
+		@Select("select carnumber from shopcart where userid=#{userid}")
+		public Shopcart getCountsShopcart(@Param("userid")int userid);
+
 }

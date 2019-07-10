@@ -305,7 +305,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li class="last">操作</li>
 			</ul>
 		</div> 
-		<form method="post" name="aaa" onsubmit="chooseaction()">
+		<form method="post" id="choose" onsubmit="chooseaction()">
 		<div class="IAbd">
 			<h4>
 				<span class="Allcheck checkbox"></span>
@@ -347,7 +347,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="Lastprice">¥ <u><%=c.getGoodsprice()*sc.get(c) %></u></li>
 						<li class="last btn">
 							<button>移入收藏夹</button><br>
-							<a class="delet"  href="javascript:deleteProduct(<%=c.getGoodsid() %>)">删除</a>
+							<a class="delete" href="javascript:deleteProduct(<%=c.getGoodsid() %>)">删除</a>
 						</li>
 					</ul>
 				</li>
@@ -372,7 +372,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span class="checkbox Allcheck"></span>
 				<span>全选</span>
 				<input type="submit"  value="删除所选物品" onclick="flag=1"/>
-				<a href="#">去结算</a>
+				<input type="submit"  value="提交订单" onclick="flag=0"/>
+
 				<p>
 					<strong>已选商品<b id="allnum"> 1 </b>件</strong>
 					<strong>总价（不含运费）：<b>￥<u id="allpri">114.00</u></b></strong><br>
@@ -387,10 +388,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var flag=0;
 			function chooseaction(){
 				if(flag==0){
-					
+
+					var a=document.getElementById("choose");
+					a.setAttribute("action","order/add");
 				}
 				else{
-					action="cart/deletechoose" ;
+					var a=document.getElementById("choose");
+					a.setAttribute("action","cart/deletechoose");
 				}
 			}
 			</script>            

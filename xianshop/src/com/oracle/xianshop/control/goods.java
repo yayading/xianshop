@@ -19,20 +19,20 @@ public class goods {
 	
 
 	/**
-	 * Õâ¾ÍÊÇÒ»¸öspring MVCÏÂÃæµÄÒ»¸öºóÌ¨controllerµÄÒ»¸öºóÌ¨·½·¨
+	 * è¿™å°±æ˜¯ä¸€ä¸ªspring MVCä¸‹é¢çš„ä¸€ä¸ªåå°controllerçš„ä¸€ä¸ªåå°æ–¹æ³•
 	 * @return
 	 */
 	@RequestMapping("/list")
 	public String listProduct(Model  m,int page){
-		System.out.println("ÕâÊÇ½øÈëÁËºóÌ¨µÄ·½·¨");
-		int count=20;//ºóÌ¨¹æ¶¨µÄÃ¿Ò³·ÖµÄÌõÊı
+		System.out.println("è¿™æ˜¯è¿›å…¥äº†åå°çš„æ–¹æ³•");
+		int count=20;//åå°è§„å®šçš„æ¯é¡µåˆ†çš„æ¡æ•°
 		List<Goods>  gs=dao.listGoods((page-1)*count,count);
-		m.addAttribute("gs", gs);//½«ºóÌ¨DAO²éÑ¯³öÀ´µÄÒ»¸ö¼¯ºÏÀïÃæµÄÉÌÆ·ĞÅÏ¢´æ´¢µ½Ò»¸öºĞ×ÓÀï
+		m.addAttribute("gs", gs);//å°†åå°DAOæŸ¥è¯¢å‡ºæ¥çš„ä¸€ä¸ªé›†åˆé‡Œé¢çš„å•†å“ä¿¡æ¯å­˜å‚¨åˆ°ä¸€ä¸ªç›’å­é‡Œ
 		
-		int allCount=dao.getAllCountOfGoods();//²éÑ¯Êı¾İ¿â»ñÈ¡×ÜĞĞÊı
-		int allPage=allCount%count==0?allCount/count:allCount/count+1;//×ÜÒ³Êı
-		int perviousPage=page-1==0?1:page-1;//ÉÏÒ»Ò³
-		int nextPage=page==allPage?allPage:page+1;//ÏÂÒ»Ò³
+		int allCount=dao.getAllCountOfGoods();//æŸ¥è¯¢æ•°æ®åº“è·å–æ€»è¡Œæ•°
+		int allPage=allCount%count==0?allCount/count:allCount/count+1;//æ€»é¡µæ•°
+		int perviousPage=page-1==0?1:page-1;//ä¸Šä¸€é¡µ
+		int nextPage=page==allPage?allPage:page+1;//ä¸‹ä¸€é¡µ
 		m.addAttribute("perviousPage", perviousPage);
 		m.addAttribute("nextPage", nextPage);
 		m.addAttribute("allPage", allPage);

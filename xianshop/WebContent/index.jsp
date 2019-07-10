@@ -1,4 +1,5 @@
 
+<%@page import="com.oracle.xianshop.model.javabean.Shopcart"%>
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
 <%@page import="com.oracle.xianshop.model.javabean.Users"%>
 <%@page import="java.util.List"%>
@@ -9,6 +10,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
+
 
 	if(request.getAttribute("gs")==null){
 		request.getRequestDispatcher("goods/list?page=1").forward(request, response);
@@ -26,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/list.css">
 	<base target="_blank">
 </head>
+
 	<script type="text/javascript">
 		function formsubmit(){
 			//var pageform=document.getElementById("pageform");
@@ -55,10 +58,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<span>嗨，澳猫欢迎你！</span>
 					</a>
 				</div>
-				<div class="user">
-					<a target="_blank" href="#">登录</a>
-					<span>|</span>
-					<a target="_blank" href="#">免费注册</a>
+					<div class="user">
+					<% if(session.getAttribute("logineduser")==null){ %>
+						<a  href="login.jsp">登录</a> <span>|</span> <a
+						target="_blank" href="#">免费注册</a>
+						<%}else{ %>
+							欢迎您：<B style="text-shadow: 0px 0px 1px green"><%=((Users)session.getAttribute("logineduser")).getNicheng() %></B>!
+							<a href="">安全退出</a>
+							<%
+						} %>
 				</div>
 				<div class="phone">
 					<a href="#">
@@ -235,7 +243,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--购物车-->
 		<a href="cart/list" target="_self" class="buy_car">
 			<p>购物车</p>
-			<em>0</em>
+			<% if(session.getAttribute("logineduser")==null){ %>
+						<em>0</em>
+						<%}else{ %>
+						<em><%=request.getAttribute("count")%></em>
+							<%
+						} %>
 		</a>
 		<!-- 新会员 -->
 		<div class="app">
@@ -788,6 +801,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul class="clearfix">
 				<% 
 					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
+
 					for(Goods  g:gs){
 				%>
 					

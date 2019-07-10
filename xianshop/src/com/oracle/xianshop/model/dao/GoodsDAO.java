@@ -10,14 +10,16 @@ import com.oracle.xianshop.model.javabean.Goods;
 
 @Mapper
 public interface GoodsDAO {
+
 /*
- * ´ÓÊı¾İ¿â»ñÈ¡·ÖÒ³Êı¾İ
+ * ä»æ•°æ®åº“è·å–åˆ†é¡µæ•°æ®
  * */
 	@Select("select *  from goods limit #{startindex},#{count}")
 	public List<Goods> listGoods(@Param("startindex")int startIndex,@Param("count")int count);
 /*
- * ²éÑ¯ÉÌÆ·×ÜĞĞÊı
+ * æŸ¥è¯¢å•†å“æ€»è¡Œæ•°
  */
 	@Select("select count(*) from goods")
 	public int getAllCountOfGoods();
+
 }
