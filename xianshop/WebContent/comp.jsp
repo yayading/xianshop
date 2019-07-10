@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.oracle.xianshop.model.javabean.Shopcart"%>
+<%@page import="com.oracle.xianshop.model.javabean.Compares"%>
 <%@page import="java.util.List"%>
 <%
 String path = request.getContextPath();
@@ -14,14 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<base href="<%=basePath%>">
 	<meta charset="UTF-8">
-	<title>购物车-澳猫团</title>
+	<title>商品对比-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/Cart.css">
     <script >
     $(function() {
-	// 购物车的复选框全选
+	// 商品对比的复选框全选
 	$('.Allcheck').click(function(event) {
 		if ($(this).hasClass('checked')) {
 			$(this).removeClass('checked');
@@ -267,7 +267,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a href="#">澳猫网</a>
 		</div>
 		<div class="LAStxt">
-			购物车
+			商品对比
 		</div>
 		<!-- 流程 -->
 		<div class="flow">
@@ -280,17 +280,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<em></em>
 				<li>4</li>
 			</ul>
-			<ol>
-				<li class="finish">我的购物车</li>
-				<li>提交订单</li>
-				<li>选择支付方式</li>
-				<li class="last">支付成功</li>
-			</ol>
 		</div>
 	</div>
 </section>
-<!-- 订单部分 -->
-<div class="indent boxS" style="height:<%=request.getAttribute("shopcount") %>px">
+<!-- 对比部分 -->
+<div class="indent boxS" style="height:<%=request.getAttribute("comparescount") %>px">
 	<div class="indentAea w1190">
 	<!-- 全选标题部分 -->
 		<div class="IAhead">
@@ -300,8 +294,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="IAul">
 				<li>关税</li>
 				<li>单价（元）</li>
-				<li>数量</li>
-				<li>金额（元）</li>
+				<!-- <li>数量</li>-->
+				<!--<li>金额（元）</li>-->
 				<li class="last">操作</li>
 			</ul>
 		</div> 
@@ -313,8 +307,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span>澳洲直邮</span>
 			</h4>
 			<ul class="IAbdArea">
-				<% Map<Goods, Integer> sc=(Map<Goods, Integer>)request.getAttribute("sc");
-					for(Goods c:sc.keySet()){
+				<% Map<Goods, Integer> cp=(Map<Goods, Integer>)request.getAttribute("cp");
+					for(Goods c:cp.keySet()){
 				%>
 				<li class="IAbdw">
 					<span class="lincheck checkbox"></span>
@@ -334,29 +328,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 						</a> -->
 					</p>
 					<ul class="IAul">
-						<li class="IAtax">￥<u>11.40</u></li>
+						<!--  <li class="IAtax">￥<u>11.40</u></li>
 						<li class="price">
 							<strong>¥ <u><%=c.getGoodsprice() %></u></strong><br>
 							<s><%=c.getGoodsprice()+50 %>元</s>
 						</li>
 						<li class="num">
 							<span class="reduce">-</span>
-							<input type="text" value="<%=sc.get(c) %>">
+							<input type="text" value="<%=cp.get(c) %>">
 							<span class="add">+</span>
-						</li>
-						<li class="Lastprice">¥ <u><%=c.getGoodsprice()*sc.get(c) %></u></li>
+						</li>-->
+						<li class="Lastprice">¥ <u><%=c.getGoodsprice()%></u></li>
 						<li class="last btn">
 							<button>移入收藏夹</button><br>
-							<a class="delet"  href="javascript:deleteProduct(<%=c.getGoodsid() %>)">删除</a>
+							<a class="delet"  href="javascript:deleteComper(<%=c.getGoodsid() %>)">删除</a>
 						</li>
 					</ul>
 				</li>
 				<%} %>
 			</ul>
 			<script type="text/javascript">
-			function deleteProduct(pid){
+			function deleteComper(pid){
 				if(window.confirm('确认删除这个商品吗')){
-					location.href='cart/delete?pid='+pid;
+					location.href='comp/delete?pid='+pid;
 				}
 			}
 			</script>
@@ -371,15 +365,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="IAbdfoot">
 				<span class="checkbox Allcheck"></span>
 				<span>全选</span>
-				<input type="submit"  value="删除所选物品" onclick="flag=1"/>
-				<a href="#">去结算</a>
-				<p>
-					<strong>已选商品<b id="allnum"> 1 </b>件</strong>
-					<strong>总价（不含运费）：<b>￥<u id="allpri">114.00</u></b></strong><br>
-					<em>活动优惠 ：-￥<u>0.00</u></em>
-					<em>商品应付总计 ：￥<u>114.00</u></em>
-					<em>订单关税：￥<u>0</u></em>
-				</p>
 			</div>
 		</div>         
 		</form>
@@ -390,7 +375,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 				}
 				else{
-					action="cart/deletechoose" ;
+					action="comp/deletechoose" ;
 				}
 			}
 			</script>            

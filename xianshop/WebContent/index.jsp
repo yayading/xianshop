@@ -1,4 +1,6 @@
+
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
+<%@page import="com.oracle.xianshop.model.javabean.Users"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,13 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%
 
 	if(request.getAttribute("gs")==null){
-		request.getRequestDispatcher("goods/list").forward(request, response);
+		request.getRequestDispatcher("goods/list?page=1").forward(request, response);
 	}
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base herf="<%=basePath%>">
+    <base href="<%=basePath%>">
 	<meta charset="UTF-8">
 	<title>列表-澳猫团</title>
 	<link rel="shortcut icon" href="favicon.ico">
@@ -24,6 +26,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/list.css">
 	<base target="_blank">
 </head>
+	<script type="text/javascript">
+		function formsubmit(){
+			//var pageform=document.getElementById("pageform");
+			var maxpage=<%=Integer.parseInt(request.getAttribute("allPage").toString())%>;
+			var pagevalue=document.getElementById("pagenum").value;
+			if(isNaN(pagevalue)){
+				alert("请输入数字！");
+			}else if(pagevalue==''){
+				alert("页数不能为空！");
+			}else if((pagevalue>maxpage)||(pagevalue<1)){
+				alert("输入页数超出范围！");
+			}
+			else{
+				location.href="goods/list?page="+pagevalue;
+			}
+		}
+	</script>
 <body>
 	<header class="wrap-all">
 		<div class="head center_1200">
@@ -214,7 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<!--购物车-->
-		<a href="#" class="buy_car">
+		<a href="cart/list" target="_self" class="buy_car">
 			<p>购物车</p>
 			<em>0</em>
 		</a>
@@ -769,16 +788,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul class="clearfix">
 				<% 
 					List<Goods> gs=(List<Goods>)request.getAttribute("gs");
-					for(Goods g:gs){
+					for(Goods  g:gs){
 				%>
-				
+					
 						<li style="margin-right:8px">
-
 							<div class="hoverShow collect"><em></em>收藏</div>
 							<!-- <div class="hoverShow wish"><em></em>加入心愿单</div> -->
 							<div class="show">
-								<a class="add" href="#">加入购物车</a>
-								<a class="contrast" href="#">商品对比</a>
+								<a class="add" target="_self" href="cart/shopcart?pid=<%=g.getGoodsid() %>" >加入购物车</a>
+								<a class="contrast" href="comp/add?pid=<%=g.getGoodsid() %>">商品对比</a>
 							</div>
 							<div class="proImg">
 								<a href="#">
@@ -803,16 +821,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 底部页码 -->
 				<div class="footNum">
 					<ul>
-						<li class="pre"><a href="#">上一页</a></li>
-						<li class="num current"><a href="#">1</a></li>
-						<li class="num"><a href="#">2</a></li>
-						<li class="num"><a href="#">3</a></li>
-						<li class="last"><a href="#">下一页</a></li>
+						<li class="pre">当前是第<%=request.getAttribute("nowPage")%>页，共<%=request.getAttribute("allPage")%>页</li>
+						<li class="pre"><a href="goods/list?page=1" target="_self">首页</a></li>
+						<li class="pre"><a href="goods/list?page=<%=request.getAttribute("perviousPage")%>" target="_self">上一页</a></li>
+						<%
+							int maxpage=Integer.parseInt(request.getAttribute("allPage").toString());
+							int i=1;
+							int pagenow=Integer.parseInt(request.getAttribute("nowPage").toString());
+							int startpage=((pagenow-1)/5)*5+1;
+							for(i=startpage;i<=maxpage&&i<=startpage+4;i++){
+						%>
+								<%if(i==pagenow){%>
+									<li class="num current"><a href="goods/list?page=<%=i%>" target="_self"><%=i%></a></li>
+								<%}else{%>
+										<li class="num"><a href="goods/list?page=<%=i%>" target="_self"><%=i%></a></li>
+									<%}%>
+								<%}%>
+						<li class="last"><a href="goods/list?page=<%=request.getAttribute("nextPage")%>" target="_self">下一页</a></li>
+						<li class="last"><a href="goods/list?page=<%=request.getAttribute("allPage")%>" target="_self">尾页</a></li>
 						<li class="txt">向第</li>
+						<li><form method="post" action="goods/list" id="pageform">
 						<li class="ipt">
-							<input type="text">
+							<input type="text" name="page" id="pagenum">
 						</li>
-						<li><button>跳转</button></li>
+						</form></li>
+						<li><button type="button" onclick="formsubmit()">跳转</button></li>
 					</ul>
 				</div>
 			</div>
