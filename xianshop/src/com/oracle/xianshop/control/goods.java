@@ -43,4 +43,11 @@ public class goods {
 		return "index";
 	}
 
+
+	@Override
+	public String toString() {
+		return "goods [getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
 }
