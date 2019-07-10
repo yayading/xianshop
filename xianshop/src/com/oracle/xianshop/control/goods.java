@@ -23,5 +23,4 @@ public class goods {
 		m.addAttribute("gs",gs);
 		return "index";
 	}
-
 }

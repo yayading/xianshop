@@ -1,5 +1,6 @@
 <%@page import="com.oracle.xianshop.model.javabean.Goods"%>
 <%@page import="com.oracle.xianshop.model.javabean.Users"%>
+<%@page import="com.oracle.xianshop.model.javabean.Shopcart"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,7 +9,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-
 	if(request.getAttribute("gs")==null){
 		request.getRequestDispatcher("goods/list").forward(request, response);
 	}
@@ -222,7 +222,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--购物车-->
 		<a href="cart/list" target="_self" class="buy_car">
 			<p>购物车</p>
-			<em>0</em>
+			<% if(session.getAttribute("logineduser")==null){ %>
+						<em>0</em>
+						<%}else{ %>
+						<em><%=request.getAttribute("count")%></em>
+							<%
+						} %>
 		</a>
 		<!-- 新会员 -->
 		<div class="app">

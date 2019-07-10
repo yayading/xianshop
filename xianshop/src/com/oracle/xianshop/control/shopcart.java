@@ -70,12 +70,19 @@ public class shopcart {
 		return "cart";
 		}
 	}
-	
 	@RequestMapping("/delete")
 	public String deleteCars(int pid,HttpSession session){
 		int userid=((Users)session.getAttribute("logineduser")).getUserid();
 		int check=dao.deleteCartShops(userid,pid);
 		System.out.println(check+"check");
+		return "redirect:list";
+	}
+	@RequestMapping("/deletechoose")
+	public String deleteChooseCars(int []pid,HttpSession session){
+		int userid=((Users)session.getAttribute("logineduser")).getUserid();
+		for(int h:pid){
+			int check=dao.deleteCartShops(userid,h);
+		}
 		return "redirect:list";
 	}
 }
